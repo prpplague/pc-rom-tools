@@ -23,5 +23,5 @@ KON:   JMP     KON
 
 section .data
 
-STRI   DB      'Hello, nedoPC ! $'
+STRI   DB      'Hello, world ! $'
 
