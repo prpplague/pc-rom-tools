@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     fseek(f,0,SEEK_END);
     sz = ftell(f);
     printf("%s %lu\n",fname,sz);
-    if(sz>=65280)
+    if(sz>=65280L)
     {
        printf("\nFile is too large!\n\n");
        fclose(f);
@@ -77,12 +77,14 @@ int main(int argc, char **argv)
     crc = Compute_CRC16(bytes,sz-2);
     printf("Calculated CRC is 0x%4.4X\n",crc);
 
-    if(sz==65536) extra = crc&0x00FF;
+    if(sz==65536L) extra = crc&0x00FF;
     else bytes[sz-1] = crc&0x00FF;
     bytes[sz-2] =  (crc&0xFF00)>>8;
-
-    crc = Compute_CRC16(bytes,sz);
-    printf("Corrected CRC is 0x%4.4X\n",crc);
+    if(sz<65536L) /* it's wrong if sz>65535 */
+    {
+      crc = Compute_CRC16(bytes,sz);
+      printf("Corrected CRC is 0x%4.4X\n",crc);
+    }
 
     po = strrchr(fname,'.');
     if(po!=NULL) *po=0;
@@ -94,10 +96,10 @@ int main(int argc, char **argv)
        free(bytes);
        return -5;
     }
-    if(sz<=32768) fwrite(bytes,1,sz,f);
-    else fwrite(bytes,1,32768,f);
+    if(sz<=32768L) fwrite(bytes,1,sz,f);
+    else fwrite(bytes,1,32768L,f);
     fclose(f);
-    if(sz>32768)
+    if(sz>32768L)
     {
        fname[strlen(fname)-1] = '2';
        f = fopen(fname,"wb");
@@ -107,12 +109,15 @@ int main(int argc, char **argv)
           free(bytes);
           return -6;
        }
-       if(sz==65536)
+       if(sz==65536L)
        {
-          fwrite(&bytes[32768],1,32767,f);
+          fwrite(&bytes[32768L],4,0x1FFF,f);
+          fputc(bytes[65532L],f);
+          fputc(bytes[65533L],f);
+          fputc(bytes[65534L],f);
           fputc(extra,f);
        }
-       else fwrite(&bytes[32768],1,sz-32768,f);
+       else fwrite(&bytes[32768L],1,sz-32768L,f);
        fclose(f);
     }
     free(bytes);
