@@ -1,4 +1,4 @@
-/* Check CRC in Paint ROM */
+/* Check CRC for Paint ROM */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,7 +17,7 @@ int main()
        f = fopen("paint0.bin","rb");
        if(f==NULL)
        {
-          printf("\nCam't open file 1!\n\n");
+          printf("\nCan't open file 1!\n\n");
           return -1;
        }
        fseek(f,0,SEEK_END);
@@ -29,7 +29,7 @@ int main()
        f = fopen("paint1.bin","rb");
        if(f==NULL)
        {
-          printf("\nCam't open file 2!\n\n");
+          printf("\nCan't open file 2!\n\n");
           return -2;
        }
        fseek(f,0,SEEK_END);

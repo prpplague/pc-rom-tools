@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 {
     FILE *f;
     int i;
-    unsigned int sz;
+    unsigned long sz;
     unsigned short crc = 0;
     unsigned char* bytes;
 
@@ -79,6 +79,11 @@ int main(int argc, char** argv)
        fseek(f,0,SEEK_SET);
        if(sz>0)
        {
+          if(sz==65536L)
+          {
+            sz-=2;
+            printf("\nAttention! CRC is calculated only for %lu bytes!\n",sz);
+          }
           bytes = (unsigned char*)malloc(sz);
           if(bytes!=NULL)
           {
@@ -88,7 +93,7 @@ int main(int argc, char** argv)
           else
           {
              fclose(f);
-             printf("\nCam't allocate %i bytes!\n\n",sz);
+             printf("\nCam't allocate %lu bytes!\n\n",sz);
              return -3;
           }
           free(bytes);
