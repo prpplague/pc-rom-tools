@@ -71,7 +71,7 @@ int main(int argc, char** argv)
        f = fopen(argv[1],"rb");
        if(f==NULL)
        {
-          printf("\nCam't open file '%s'!\n\n",argv[1]);
+          printf("\nCan't open file '%s'!\n\n",argv[1]);
           return -1;
        }
        fseek(f,0,SEEK_END);
@@ -93,7 +93,7 @@ int main(int argc, char** argv)
           else
           {
              fclose(f);
-             printf("\nCam't allocate %lu bytes!\n\n",sz);
+             printf("\nCan't allocate %lu bytes!\n\n",sz);
              return -3;
           }
           free(bytes);
