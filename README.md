@@ -1,2 +1,2 @@
-# PCjrCart
-PCjrCart is a custom cartridge sowftare and hardware for IBM PCjr computer
+# PCjrStuff
+PCjrStuff is a custom sowftare and hardware for IBM PCjr computer under GPLv3 created by Shaos
