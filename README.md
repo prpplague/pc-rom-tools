@@ -1,2 +1,4 @@
-# PCjrStuff
-PCjrStuff is a custom sowftare and hardware for IBM PCjr computer under GPLv3 created by Shaos
+# PC ROM Tool
+
+Basic tools for creating BIOS Extension ROMs for the IBM PCjr and IBM PC/XT/AT
+Originally Created by Shaos and Licenced under GPLv3
