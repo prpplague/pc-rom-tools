@@ -1,0 +1,1 @@
+nasm jrcarts.asm -fbin -o jrcarts.bin -l jrcarts.lst
