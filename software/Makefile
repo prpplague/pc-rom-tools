@@ -4,3 +4,17 @@ default: pcjrcart.c crc16.c
 
 clean:
 	rm -rf pcjrcart genrom
+
+dosbox:
+	nasm dosbox_test.asm -fbin -o test.com
+	./genrom test.com
+
+pcjr:
+	nasm pcjr_test.asm -fbin -o test.com
+	./pcjrcart test.com
+
+generic:
+	nasm generic_test.asm -fbin -o test.com
+	./genrom test.com
+
+
