@@ -1,0 +1,11 @@
+*.bin
+*.com
+
+genrom
+pcjrcart
+
+# no zip or tarballs
+*.zip
+*.gz
+*.bz
+*.tgz
