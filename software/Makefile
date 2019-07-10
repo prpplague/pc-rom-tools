@@ -3,7 +3,7 @@ default: pcjrcart.c crc16.c
 	gcc -o genrom genrom.c
 
 clean:
-	rm -rf pcjrcart genrom
+	rm -rf pcjrcart genrom *.bin *.com
 
 dosbox:
 	nasm dosbox_test.asm -fbin -o test.com
