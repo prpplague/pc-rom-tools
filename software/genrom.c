@@ -30,8 +30,6 @@ int main(int argc, char **argv)
        return -2;
     }
     memset(bytes,0,MAXSIZE);
-    bytes[0] = 0x55;
-    bytes[1] = 0xAA;
 
     strcpy(fname,argv[1]);
     f = fopen(fname,"rb");
@@ -51,9 +49,15 @@ int main(int argc, char **argv)
        free(bytes);
        return -4;
     }
+
+    /* Load the executable COM file starting at 0x100 */
     fseek(f,0,SEEK_SET);
     fread(&bytes[256],1,sz,f);
     fclose(f);
+
+    /* bytes[1:0] contain the BIOS extension magic number 0x55 0xAA */
+    bytes[0] = 0x55;
+    bytes[1] = 0xAA;
 
     sz += 258;
     if(sz&511)
@@ -61,11 +65,17 @@ int main(int argc, char **argv)
        sz &= 0xFE00;
        sz += 512;
     }
+
+    /* bytes[2] contains the number of 512 byte blocks in the image */
     bytes[2] = sz>>9;
     printf("ROM size is %lu bytes (%i)\n",sz,bytes[2]);
+
+    /* unconditional jump to 0x100 where the COM file starts */
     bytes[3] = 0xE9;
     bytes[4] = 0x01;
     bytes[5] = 0x00;
+
+    /* this section is unknown */
     bytes[6] = 0x00;
     bytes[7] = 0xB8;
     bytes[8] = 0x00;
@@ -82,6 +92,11 @@ int main(int argc, char **argv)
 
     sum8=(((~(sum8 & 0xff)) + 1) & 0xff);
     printf("8-bit Checksum=%x\n",sum8);
+
+    /* for this implementation the last byte in the image is used  */
+    /* to store the 8-bit checksum value. some implementations may */
+    /* use bytes[5] as this location, as the last two bytes in an  */
+    /* may be used as majic numbers to identify image type.        */
     bytes[sz-1]=sum8;
 
     po = strrchr(fname,'.');
