@@ -16,17 +16,17 @@ PCjr Testing
 
 to generate an executable com file:
 <pre>
-nasm pcjr_test.asm -fbin -o test.com
+$ nasm pcjr_test.asm -fbin -o test.com
 </pre>
 generate a binary rom image:
 <pre>
-pcjrcart test.com
+$ pcjrcart test.com
 </pre>
 
 the resulting test.bin file can be flash to your EEPROM. This image can also
 be generated with make:
 <pre>
-make pcjr
+$ make pcjr
 </pre>
 
 
@@ -34,18 +34,18 @@ Dosbox Testing:
 
 to generate an executable com file:"
 <pre>
-nasm dosbox_test.asm -fbin -i test.com
+$ nasm dosbox_test.asm -fbin -i test.com
 </pre>
 
 This image can also be generated with make:
 
 <pre>
-make dosbox
+$ make dosbox
 </pre>
 execute dosbox:
 
 <pre>
-dosbox -machine cga test.com
+$ dosbox -machine cga test.com
 </pre>
 
 
@@ -54,20 +54,20 @@ Generic ROM Testing:
 to generate an executable com file:
 
 <pre>
-nasm generic_test.asm -fbin -o test.com
+$ nasm generic_test.asm -fbin -o test.com
 </pre>
 
 generate a binary rom image:
 
 <pre>
-genrom test.com
+$ genrom test.com
 </pre>
 
 the resulting test.bin file can be flash to your EEPROM. This image can also
 be generated with make:
 
 <pre>
-make generic
+$ make generic
 </pre>
 
 
