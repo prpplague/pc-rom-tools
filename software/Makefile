@@ -7,7 +7,6 @@ clean:
 
 dosbox:
 	nasm dosbox_test.asm -fbin -o test.com
-	./genrom test.com
 
 pcjr:
 	nasm pcjr_test.asm -fbin -o test.com
