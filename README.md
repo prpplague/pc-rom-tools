@@ -23,10 +23,16 @@ generate a binary rom image:
 $ pcjrcart test.com
 </pre>
 
-the resulting test.bin file can be flash to your EEPROM. This image can also
-be generated with make:
+the resulting test.bin file can be flash to your EEPROM. 
+
+This image can also be generated with make:
 <pre>
 $ make pcjr
+./pcjrcart test.com
+test.com 52
+ROM size is 512 bytes (1)
+Calculated CRC is 0x714A
+Corrected CRC is 0x0000
 </pre>
 
 
@@ -38,10 +44,15 @@ $ nasm dosbox_test.asm -fbin -i test.com
 </pre>
 
 This image can also be generated with make:
-
 <pre>
 $ make dosbox
+nasm dosbox_test.asm -fbin -o test.com
+./genrom test.com
+test.com 52
+ROM size is 512 bytes (1)
+8-bit Checksum=27
 </pre>
+
 execute dosbox:
 
 <pre>
@@ -51,7 +62,7 @@ $ dosbox -machine cga test.com
 
 Generic ROM Testing:
 
-to generate an executable com file:
+To generate an executable com file:
 
 <pre>
 $ nasm generic_test.asm -fbin -o test.com
@@ -63,11 +74,18 @@ generate a binary rom image:
 $ genrom test.com
 </pre>
 
-the resulting test.bin file can be flash to your EEPROM. This image can also
-be generated with make:
+the resulting test.bin file can be flash to your EEPROM.
+
+This image can also be generated with make:
 
 <pre>
 $ make generic
+nasm generic_test.asm -fbin -o test.com
+./genrom test.com
+test.com 52
+ROM size is 512 bytes (1)
+8-bit Checksum=27
+
 </pre>
 
 
