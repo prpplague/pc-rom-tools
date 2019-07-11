@@ -48,10 +48,6 @@ This image can also be generated with make:
 <pre>
 $ make dosbox
 nasm dosbox_test.asm -fbin -o test.com
-./genrom test.com
-test.com 52
-ROM size is 512 bytes (1)
-8-bit Checksum=27
 </pre>
 
 execute dosbox:
