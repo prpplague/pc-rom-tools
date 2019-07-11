@@ -28,6 +28,7 @@ the resulting test.bin file can be flash to your EEPROM.
 This image can also be generated with make:
 <pre>
 $ make pcjr
+nasm pcjr_test.asm -fbin -o test.com
 ./pcjrcart test.com
 test.com 52
 ROM size is 512 bytes (1)
