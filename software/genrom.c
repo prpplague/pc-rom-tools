@@ -50,9 +50,9 @@ int main(int argc, char **argv)
        return -4;
     }
 
-    /* Load the executable COM file starting at 0x100 */
+    /* Load the binary image at the 0x0003 entry point */
     fseek(f,0,SEEK_SET);
-    fread(&bytes[256],1,sz,f);
+    fread(&bytes[3],1,sz,f);
     fclose(f);
 
     /* bytes[1:0] contain the BIOS extension magic number 0x55 0xAA */
@@ -69,20 +69,6 @@ int main(int argc, char **argv)
     /* bytes[2] contains the number of 512 byte blocks in the image */
     bytes[2] = sz>>9;
     printf("ROM size is %lu bytes (%i)\n",sz,bytes[2]);
-
-    /* unconditional jump to 0x100 where the COM file starts */
-    bytes[3] = 0xE9;
-    bytes[4] = 0x01;
-    bytes[5] = 0x00;
-
-    /* this section is unknown */
-    bytes[6] = 0x00;
-    bytes[7] = 0xB8;
-    bytes[8] = 0x00;
-    bytes[9] = 0x01;
-    bytes[10] = 0xFF;
-    bytes[11] = 0xE0;
-
 
     /* generate simple 8-bit checksum */
     sum8=0;
